@@ -1,3 +1,6 @@
+% change the filenames of each files
+% change the directory of the saved data
+
 % get the sensor data from text file into variables
 acc = importsensorfile('dataset_1/0_synced_10.186.6.43_2017-09-22_Sensor_acc.txt',';\t');
 gra = importsensorfile('dataset_1/0_synced_10.186.6.43_2017-09-22_Sensor_gra.txt',';');
