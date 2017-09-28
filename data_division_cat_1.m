@@ -1,6 +1,8 @@
 function data_division_cat_1(sensor, train_file, test_file, data_file)
 
 load(data_file);
+delete(train_file);
+delete(test_file);
 
 wbt_size = 1;               % to keep track of the word_by_time array
 for i = 1:size(category,1)

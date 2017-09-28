@@ -1,7 +1,9 @@
 % DATA_PREPROCESSING 
 % Step 1: Goes through the plugin data, separates each word
 % with their start time and end time and saves them in words_by_time array.
-% Step 2: 
+% Step 2: Finds the categories and freq. of words
+% Step 3: Separate train and test sensor data by the start and end time of
+% a word
 
 words_by_time=[];    % [word startTime endTime]   
 
@@ -31,15 +33,26 @@ words_by_category = categorical(words_by_time(:,1), {'purdue', 'test', 'result'}
 category = categories(words_by_category);
 freq_by_cat = countcats(words_by_category);
 
+% Step 2:
 % data_size(:, 1) test data size and data_size(:, 2) is train data size
 % row i depicts word i in category 
 data_size = [ceil(freq_by_cat*0.25) (freq_by_cat-ceil(freq_by_cat*0.25)) ];
 
 save('dataset_1/data_1.mat', 'words_by_category', 'category', 'freq_by_cat', 'data_size', '-append');
 
+% Step 3:
 % dividing respective sensor data to two files - train and test
 % This is process 1 - look for the time closest to start time of word
 % (i.e., purdue's p) and time closest to end time of word
 % (i.e., purdue's e) and ignore the blank after that and use those sensor
 % data as one input for 'purdue'
-data_division_cat_1(acc, 'dataset_1/train.txt', 'dataset_1/test.txt', 'dataset_1/data_1.mat');
+data_division_cat_1(acc, 'dataset_1/train_acc.txt', 'dataset_1/test_acc.txt', 'dataset_1/data_1.mat');
+
+
+% Step 4:
+% get the X & Y from each file
+train_label_distribution = data_size(:,2);
+test_label_distribution = data_size(:,1);
+formatSpec = '%f %f %f';                    % change the format if you want to accomodate multiple sensors
+
+[X, Y] = load_file('dataset_1/train_acc.txt', formatSpec, category, train_label_distribution);
