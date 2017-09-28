@@ -47,12 +47,8 @@ save('dataset_1/data_1.mat', 'words_by_category', 'category', 'freq_by_cat', 'da
 % (i.e., purdue's e) and ignore the blank after that and use those sensor
 % data as one input for 'purdue'
 data_division_cat_1(acc, 'dataset_1/train_acc.txt', 'dataset_1/test_acc.txt', 'dataset_1/data_1.mat');
+data_division_cat_1(gra, 'dataset_1/train_gra.txt', 'dataset_1/test_gra.txt', 'dataset_1/data_1.mat');
+data_division_cat_1(gyro, 'dataset_1/train_gyro.txt', 'dataset_1/test_gyro.txt', 'dataset_1/data_1.mat');
+data_division_cat_1(lin, 'dataset_1/train_lin.txt', 'dataset_1/test_lin.txt', 'dataset_1/data_1.mat');
+data_division_cat_1(mag, 'dataset_1/train_mag.txt', 'dataset_1/test_mag.txt', 'dataset_1/data_1.mat');
 
-
-% Step 4:
-% get the X & Y from each file
-train_label_distribution = data_size(:,2);
-test_label_distribution = data_size(:,1);
-formatSpec = '%f %f %f';                    % change the format if you want to accomodate multiple sensors
-
-[X, Y] = load_file('dataset_1/train_acc.txt', formatSpec, category, train_label_distribution);
