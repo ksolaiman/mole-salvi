@@ -12,15 +12,16 @@ i = 1;
 while i <= size(plugin,1)
     word = "";
     startTime = plugin.time(i,1);
-    while plugin.label(i,1) ~= ''     % when no letters are found by plugin
+    while plugin.label(i,1) ~= ''  % when no letters are fo und by plugin
         word = strcat(word, plugin.label(i, 1));
         i= i+1;
     end
     
-    % already read the gap, so the last letter of word was in index (i-1)
-    endTime = plugin.time(i-1, 1);
-    words_by_time = vertcat(words_by_time, [word startTime endTime]);
-    
+    if ismember(word, {'purdue', 'test', 'result'})
+        % already read the gap, so the last letter of word was in index (i-1)
+        endTime = plugin.time(i-1, 1);
+        words_by_time = vertcat(words_by_time, [word startTime endTime]);
+    end
     % increase i to go to next letter, so the next word
     i = i+1;
 end

@@ -14,6 +14,7 @@ function [net, accuracy] = LSTM(X, Y, XTest, YTest, ipSize, nClass, miniBatch)
 % xticklabels('auto')
 % xlabel("Time Step")
 
+
 % Get the sequence lengths for each observation.
 numObservations = numel(X);
 for i=1:numObservations
@@ -27,12 +28,12 @@ X = X(idx);
 Y = Y(idx);
 
 % View the sorted sequence lengths in a bar chart.
-% figure
-% bar(sequenceLengths)
-% ylim([0 100])
-% xlabel("Sequence")
-% ylabel("Length")
-% title("Sequence Lengths")
+%  figure
+%  bar(sequenceLengths)
+%  ylim([0 100])
+%  xlabel("Sequence")
+%  ylabel("Length")
+%  title("Sequence Lengths")
 
 miniBatchSize = miniBatch;
 miniBatchLocations = miniBatchSize+1:miniBatchSize:numObservations;
@@ -58,6 +59,7 @@ layers = [ ...
     softmaxLayer
     classificationLayer]
 
+% , 'BiasL2Factor', 2, 'InputWeightsL2Factor', 2, 'RecurrentWeightsL2Factor', 2
 
 % specify the training options
 maxEpochs = 150;
@@ -67,10 +69,17 @@ shuffle = 'never';
 options = trainingOptions('sgdm', ...
     'MaxEpochs',maxEpochs, ...
     'MiniBatchSize',miniBatchSize, ...
+    'Plots','training-progress', ...
     'Shuffle', shuffle);
+
+%     'L2Regularization',0.0005, ...
+%     'OutputFcn',@(info)stopIfAccuracyNotImproving(info,3), ...
 
 % Train LSTM Network
 net = trainNetwork(X,Y,layers,options);
+
+
+
 
 % Sort the test data by sequence length.
 numObservationsTest = numel(XTest);
