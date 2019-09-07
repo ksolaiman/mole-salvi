@@ -1,12 +1,12 @@
 * Following commands should be run consecutively to execute the program - 
 
-- data_collection 
-	Go into the file and change the sensor & plugin file names
-- data_preprocessing_cat_1
-- Neural_net 
-	Few parameters will have to be changed in this file with the size of the data 
-	or have to be tweaked for getting a better result, specifically in this line, 
-	[net, accuracy] = LSTM(X, Y, XTest, YTest, 3, 3, 10)
+	- data_collection 
+		Go into the file and change the sensor & plugin file names
+	- data_preprocessing_cat_1
+	- Neural_net 
+		Few parameters will have to be changed in this file with the size of the data 
+		or have to be tweaked for getting a better result, specifically in this line, 
+		[net, accuracy] = LSTM(X, Y, XTest, YTest, 3, 3, 10)
 
 * Output
 
